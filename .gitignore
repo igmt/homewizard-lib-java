@@ -1,6 +1,9 @@
-*.class
+.DS_Store
 
-# Package Files #
-*.jar
-*.war
-*.ear
+*.class
+.classpath
+.project
+
+# Directories #
+.settings/
+bin/
