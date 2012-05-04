@@ -20,8 +20,8 @@ public final class HWConnection {
 	
 	private long lastStatusUpdate;
 	
-	protected HWConnection(String ipadres, String password) {
-		this.connectionString = "http://" + ipadres + "/" + password;
+	protected HWConnection(String ipadres, String password, String port) {
+		this.connectionString = "http://" + ipadres + ":" + port + "/" + password;
 		this.statusTimeout = 2000;
 	}
 	
@@ -85,6 +85,20 @@ public final class HWConnection {
 			response = getData(connectionString + "/sw/" + id + "/" + onOrOff).trim();
 		} catch (Exception e) {
 			throw new HWException("Error connection to HomeWizard",e);
+		}
+		return response;
+	}
+	
+	/**
+	 * Sets dimlevel of the dimmer with given id on. equivaltn to http://<ip>/<password>/sw/dim/<id>/<dimLevel>
+	 * @param The id of the dimmer
+	 */
+	protected String setDimLevel(int id, int dimLevel) throws HWException {
+		String response = "";
+		try {
+			response = getData(connectionString + "/sw/dim/" + id + "/" + dimLevel).trim();
+		} catch (Exception e) {
+			throw new HWException("Error connecting to HomeWizard",e);
 		}
 		return response;
 	}
