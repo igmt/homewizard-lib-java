@@ -22,8 +22,8 @@ public final class HWSystem {
 	
 	private ArrayList<HWSwitch> switches;
 	
-	public HWSystem(String ipadres, String password) {
-		connection = new HWConnection(ipadres,password);
+	public HWSystem(String ipadres, String password, String port) {
+		connection = new HWConnection(ipadres,password,port);
 	}
 	
 	public double getHWVersion() {
@@ -166,6 +166,23 @@ public final class HWSystem {
 		String statusJSON;
 		statusJSON = connection.doToggleSwitch(id, onOrOff);
 		
+		try {
+			JSONObject hwmessage = new JSONObject(statusJSON);
+			if (hwmessage.getString("status").equals("ok")) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (JSONException e) {
+			throw new HWException("Error parsing JSON", e);
+		}
+	}
+	
+	//Dimmer method
+	protected boolean setDimLevel(int id, int dimLevel) throws HWException {
+		String statusJSON;
+		statusJSON = connection.setDimLevel(id, dimLevel);
+
 		try {
 			JSONObject hwmessage = new JSONObject(statusJSON);
 			if (hwmessage.getString("status").equals("ok")) {
