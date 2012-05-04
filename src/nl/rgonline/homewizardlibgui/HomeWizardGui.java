@@ -17,6 +17,7 @@ public class HomeWizardGui extends JFrame {
 	private ArrayList<SwitchPanel> switchpanels;
 	private Timer timer;
 	
+	//Default portnumber=80
 	public HomeWizardGui(String ipadres, String password, String port) throws HWException {
 		switchpanels = new ArrayList<SwitchPanel>();
 		timer = new Timer();
@@ -60,7 +61,7 @@ public class HomeWizardGui extends JFrame {
 	public static void main(String[] args) {
 		JFrame frame = null;
 		try {
-			frame = new HomeWizardGui("192.168.1.6", "secret");
+			frame = new HomeWizardGui("192.168.1.6", "secret", "80");
 		} catch (HWException e) {
 			e.printStackTrace();
 		}
