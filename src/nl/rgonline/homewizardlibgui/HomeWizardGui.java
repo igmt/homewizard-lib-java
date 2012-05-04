@@ -17,12 +17,12 @@ public class HomeWizardGui extends JFrame {
 	private ArrayList<SwitchPanel> switchpanels;
 	private Timer timer;
 	
-	public HomeWizardGui(String ipadres, String password) throws HWException {
+	public HomeWizardGui(String ipadres, String password, String port) throws HWException {
 		switchpanels = new ArrayList<SwitchPanel>();
 		timer = new Timer();
 		
 		//Init HWSystem
-		hwsystem = new HWSystem(ipadres, password);
+		hwsystem = new HWSystem(ipadres, password, port);
 		hwsystem.init();
 		
 		//Init frame
